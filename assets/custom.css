@@ -1,1 +1,18 @@
 /* Place custom css here. */
+@import url('https://fonts.cdnfonts.com/css/satoshi');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+header,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Satoshi', 'PT Sans', system-ui, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, 'Source Sans Pro', 'Open Sans', sans-serif;
+}
+
+article {
+    line-height: 1.5;
+    font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, Roboto, 'PT Sans', Ubuntu, 'Source Sans Pro', 'Open Sans', 'Helvetica Neue', sans-serif;
+}

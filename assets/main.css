@@ -469,7 +469,8 @@ body {
 }
 
 :is(:where(.dark) body) {
-  background-color: rgb(0 0 0 / 0.9);
+  /* background-color: rgb(0 0 0 / 0.9); */
+  background-color: rgb(40 40 40 / 1);
 }
 
 *,

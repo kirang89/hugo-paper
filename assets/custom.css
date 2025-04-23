@@ -15,6 +15,7 @@ h6 {
 article {
     line-height: 1.5;
     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, Roboto, 'PT Sans', Ubuntu, 'Source Sans Pro', 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1.18rem;
 }
 
 .btn {

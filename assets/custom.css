@@ -28,4 +28,5 @@ article {
   line-height: 1.25rem;
   color: rgb(0 0 0);
   text-decoration-line: none;
+  box-shadow: unset;
 }

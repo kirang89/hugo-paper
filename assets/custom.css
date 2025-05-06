@@ -15,7 +15,13 @@ h6 {
 article {
     line-height: 1.5;
     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, Roboto, 'PT Sans', Ubuntu, 'Source Sans Pro', 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 1.18rem;
+    font-size: 1.15rem;
+    color: #444;
+}
+
+article code {
+  font-size: .99rem!important;
+  font-family: 'JetBrains Mono', monospace;
 }
 
 .btn {
@@ -27,9 +33,13 @@ article {
   padding-bottom: 1rem;
   font-size: 0.875rem;
   line-height: 1.25rem;
-  color: rgb(0 0 0);
+  color: #222;
   text-decoration-line: none;
   box-shadow: unset;
+}
+
+.prose :where(h1):not(:where([class~=not-prose],[class~=not-prose] *)) {
+  color: var(--tw-prose-headings);
 }
 
 .prose :where(h2):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
@@ -46,12 +56,12 @@ article {
   margin-bottom: 0rem;
 }
 
-article code {
-  font-size: .99rem!important;
-  font-family: 'JetBrains Mono', monospace;
-}
-
 .prose :where(code):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
   font-size: 0.875em;
   font-family: 'JetBrains Mono', monospace;
+}
+
+:is(:where(.dark) article) {
+    --tw-text-opacity: 0.9;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
 }

@@ -1,0 +1,14 @@
+{{- $url := .Get 0 -}}
+{{- if not $url -}}
+  {{- errorf "missing Google Photos album URL: %s" .Position -}}
+{{- end -}}
+
+<div class="google-photos-embed" style="position: relative; padding-bottom: 75%; height: 0; overflow: hidden; max-width: 100%; margin: 2rem 0;">
+  <iframe
+    src="{{ $url }}"
+    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+    frameborder="0"
+    allowfullscreen
+    loading="lazy"
+  ></iframe>
+</div>

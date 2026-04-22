@@ -308,7 +308,7 @@ article blockquote {
   border-color: rgba(0, 0, 0, 0.18) !important;
   color: #4d4741 !important;
   font-weight: 400 !important;
-  font-style: italic;
+  font-style: normal !important;
   padding-left: 1.35em !important;
   margin-left: 0.25em;
 }

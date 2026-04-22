@@ -147,7 +147,42 @@ article ul > li::marker {
 }
 article ol,
 article ul {
-  padding-left: 1.25em;
+  padding-left: 0;
+  list-style: none;
+  counter-reset: li;
+}
+article ol > li,
+article ul > li {
+  padding-left: 1.75em;
+  text-indent: -1.75em;
+}
+article ul > li::before {
+  content: "\2022";
+  display: inline-block;
+  width: 1.75em;
+  color: #bcb3a6;
+  text-indent: 0;
+}
+article ol > li {
+  counter-increment: li;
+}
+article ol > li::before {
+  content: counter(li) ".";
+  display: inline-block;
+  width: 1.75em;
+  color: #9a938a;
+  font-variant-numeric: tabular-nums lining-nums;
+  font-size: 0.95em;
+  text-indent: 0;
+}
+:is(:where(.dark) article) ul > li::before { color: #5f584e; }
+:is(:where(.dark) article) ol > li::before { color: #7a736a; }
+/* Reset text-indent on nested blocks so blockquotes, nested lists, and
+   inner paragraphs inside a list item don't inherit the hanging-marker
+   negative indent. */
+article ol > li > *,
+article ul > li > * {
+  text-indent: 0;
 }
 
 /* 4. Inline code: regular weight, slightly smaller, faint tinted bg,

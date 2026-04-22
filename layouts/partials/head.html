@@ -14,7 +14,7 @@
   <meta name="theme-color" />
 
   <!-- Author -->
-  {{ $site_author := or site.Author.name site.Params.name site.Title }}
+  {{ $site_author := or site.Params.author site.Params.name site.Title }}
   <!---->
   {{ if eq .Kind "page" }}
   <meta name="description" content="{{ .Summary }}" />
@@ -27,6 +27,11 @@
   />
   <meta name="author" content="{{ $site_author }}" />
   {{ end }}
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" />
 
   <!-- CSS & JS -->
   {{ $main := resources.Get "main.css" }}

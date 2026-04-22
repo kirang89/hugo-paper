@@ -1,6 +1,6 @@
 /* Place custom css here. */
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+/* Fonts are loaded via <link> tags in layouts/partials/head.html to avoid
+   CSS @import being reordered/mangled by concat + minify. */
 
 header,
 h1,
@@ -13,15 +13,12 @@ h6 {
 }
 
 article {
-    line-height: 1.5;
-    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, Roboto, 'PT Sans', Ubuntu, 'Source Sans Pro', 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 1.15rem;
-    color: #444;
-}
-
-article code {
-  font-size: .99rem!important;
-  font-family: 'JetBrains Mono', monospace;
+    line-height: 1.55;
+    font-family: 'Literata', Charter, Georgia, 'Times New Roman', Times, serif;
+    font-size: 1.2rem;
+    color: #1d1d1b;
+    font-feature-settings: "kern", "liga", "onum";
+    font-optical-sizing: auto;
 }
 
 .btn {
@@ -49,6 +46,11 @@ article code {
   margin-top: 2em;
   margin-bottom: 1em;
   line-height: 1.3333333;
+  letter-spacing: -0.01em;
+}
+
+.prose :where(h3):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+  letter-spacing: -0.005em;
 }
 
 .my-10 {
@@ -56,12 +58,194 @@ article code {
   margin-bottom: 0rem;
 }
 
-.prose :where(code):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
-  font-size: 0.875em;
-  font-family: 'JetBrains Mono', monospace;
-}
-
 :is(:where(.dark) article) {
     --tw-text-opacity: 0.9;
     color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+/* ---------------------------------------------------------------
+   Typography refinements
+   --------------------------------------------------------------- */
+
+/* 1. Tune the prose column to sit in the 65–70 cpl sweet spot.
+      Default max-w-3xl (48rem) renders ~76 cpl on Literata —
+      a hair wide. Narrow slightly so the column reads more
+      book-like. The header keeps its own max-width. */
+main.prose {
+  max-width: 45rem;
+}
+
+/* 2. Warm canvas + near-black body.
+      Background comes from hugo.toml `color = 'linen'` (#faf8f1).
+      Body already set to #1d1d1b on `article` above. */
+
+/* Link color: keep close to body text. Thinner underline, dropped below
+   the baseline so it doesn't crowd descenders. Inherit body weight so
+   links don't read as semi-bold in running text. */
+article a {
+  color: #111;
+  font-weight: inherit !important;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  text-decoration-color: rgba(0, 0, 0, 0.35);
+  transition: text-decoration-color 150ms ease;
+}
+article a:hover {
+  text-decoration-color: rgba(0, 0, 0, 0.75);
+}
+:is(:where(.dark) article) a {
+  color: #f3efe8;
+  text-decoration-color: rgba(255, 255, 255, 0.35);
+}
+:is(:where(.dark) article) a:hover {
+  text-decoration-color: rgba(255, 255, 255, 0.8);
+}
+
+/* 3. Quiet the ordered-list numerals. Tabular lining figures,
+      lighter tone, fractionally smaller than body. */
+article ol > li::marker {
+  color: #9a938a;
+  font-variant-numeric: tabular-nums lining-nums;
+  font-weight: 400;
+  font-size: 0.95em;
+}
+article ul > li::marker {
+  color: #bcb3a6;
+}
+article ol,
+article ul {
+  padding-left: 1.25em;
+}
+
+/* 4. Inline code: regular weight, slightly smaller, faint tinted bg,
+      horizontal padding. Does not apply to code blocks (pre code).
+      Lift the glyph slightly so the mono baseline sits with the serif
+      x-height instead of riding low. */
+article :not(pre) > code {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-weight: 400 !important;
+  font-size: 0.88em !important;
+  line-height: inherit !important;
+  background: rgba(40, 33, 20, 0.06);
+  color: #2a2621;
+  padding: 0.1em 0.38em;
+  border-radius: 3px;
+  display: inline;
+  vertical-align: 0.02em;
+}
+/* Strip the Tailwind typography `` markers around inline code. */
+.prose :where(code):not(:where([class~='not-prose'], [class~='not-prose'] *))::before,
+.prose :where(code):not(:where([class~='not-prose'], [class~='not-prose'] *))::after {
+  content: '' !important;
+}
+:is(:where(.dark) article) :not(pre) > code {
+  background: rgba(255, 255, 255, 0.08);
+  color: #eee;
+}
+
+/* 5. Title → date → body rhythm.
+      Collapse the 4rem `mb-16` header gap; treat the date as
+      a small tracked label; let the gap to the first paragraph
+      come from the paragraph's own top margin (~1em). */
+article > header.mb-16 {
+  margin-bottom: 2.25rem !important;
+}
+article > header h1 {
+  padding-bottom: 0.5rem !important;
+  letter-spacing: -0.015em;
+}
+article > header > div.text-sm {
+  opacity: 1 !important;
+  color: #7a736a;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+:is(:where(.dark) article) > header > div.text-sm {
+  color: #a8a198;
+}
+
+/* 6. Blockquote: keep italics. Soften the color, thin the rule,
+      add breathing room, drop the auto curly quotes since the
+      rule already signals the quote. */
+article blockquote {
+  border-left-width: 2px !important;
+  border-color: rgba(0, 0, 0, 0.18) !important;
+  color: #4d4741 !important;
+  font-weight: 400 !important;
+  font-style: italic;
+  padding-left: 1.35em !important;
+  margin-left: 0.25em;
+}
+:is(:where(.dark) article) blockquote {
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  color: #cfc9c1 !important;
+}
+.prose :where(blockquote p:first-of-type):not(:where([class~='not-prose'], [class~='not-prose'] *))::before,
+.prose :where(blockquote p:last-of-type):not(:where([class~='not-prose'], [class~='not-prose'] *))::after {
+  content: '' !important;
+}
+
+/* 7. Header: lighter wordmark, muted nav, de-emphasised social icons.
+      Social icons stay — just lighter in light mode via opacity. */
+body > header a[href$="/"] {
+  font-weight: 500;
+}
+body > header .nav-wrapper nav a {
+  color: #5a544d;
+}
+body > header .nav-wrapper nav a:hover {
+  color: #111;
+}
+:is(:where(.dark) body) > header .nav-wrapper nav a {
+  color: #b8b1a8;
+}
+:is(:where(.dark) body) > header .nav-wrapper nav a:hover {
+  color: #fff;
+}
+/* Social icons: reduce visual weight. They're rendered as
+   dark:invert'd SVG backgrounds, so opacity carries through both modes. */
+body > header .nav-wrapper nav[class*="space-x-10"] a {
+  opacity: 0.55;
+  transition: opacity 150ms ease;
+}
+body > header .nav-wrapper nav[class*="space-x-10"] a:hover {
+  opacity: 1;
+}
+
+/* 8. Post-nav footer card: breathing room, looser arrow/title gap,
+      lighter labels so it reads as navigation rather than content. */
+article > nav[class*="rounded-lg"] {
+  background-color: transparent !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 0 !important;
+}
+:is(:where(.dark) article) > nav[class*="rounded-lg"] {
+  background-color: transparent !important;
+  border-top-color: rgba(255, 255, 255, 0.12);
+}
+article > nav[class*="rounded-lg"] > a {
+  padding: 2rem 1.5rem !important;
+  font-weight: 500 !important;
+  color: #5a544d !important;
+  font-size: 1rem;
+}
+article > nav[class*="rounded-lg"] > a:hover {
+  color: #111 !important;
+  background-color: transparent !important;
+}
+:is(:where(.dark) article) > nav[class*="rounded-lg"] > a {
+  color: #b8b1a8 !important;
+}
+:is(:where(.dark) article) > nav[class*="rounded-lg"] > a:hover {
+  color: #fff !important;
+}
+article > nav[class*="rounded-lg"] > a .mr-1\.5 {
+  margin-right: 0.75rem !important;
+  opacity: 0.6;
+}
+article > nav[class*="rounded-lg"] > a .ml-1\.5 {
+  margin-left: 0.75rem !important;
+  opacity: 0.6;
 }

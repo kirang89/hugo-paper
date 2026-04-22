@@ -21,6 +21,20 @@ article {
     font-optical-sizing: auto;
 }
 
+/* Book-quality line breaking (Chrome 117+, Safari 17.5+). Body paragraphs
+   and list items ask the browser to avoid orphans/widows; headings get
+   `balance` so multi-line titles wrap evenly. */
+article p,
+article li {
+  text-wrap: pretty;
+}
+article > header h1,
+article h2,
+article h3,
+article h4 {
+  text-wrap: balance;
+}
+
 .btn {
   border-radius: 0px;
   background-color: rgb(255 255 255);

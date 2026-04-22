@@ -59,8 +59,19 @@ article {
 }
 
 :is(:where(.dark) article) {
-    --tw-text-opacity: 0.9;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
+    color: #e6dfd0;
+}
+
+/* Warm dark mode: replace the default `dark:bg-black/90` + `dark:text-white`
+   with a linen-inverted canvas and warm off-white ink. Keeps the "book at
+   low light" feel consistent with the light mode. */
+:is(:where(.dark) body) {
+  background-color: #16130f !important;
+  color: #e6dfd0 !important;
+}
+:is(:where(.dark) body) .btn {
+  background-color: #e6dfd0;
+  color: #16130f;
 }
 
 /* ---------------------------------------------------------------
@@ -248,4 +259,116 @@ article > nav[class*="rounded-lg"] > a .mr-1\.5 {
 article > nav[class*="rounded-lg"] > a .ml-1\.5 {
   margin-left: 0.75rem !important;
   opacity: 0.6;
+}
+
+/* ---------------------------------------------------------------
+   Archive (home + tag pages): date-left timeline, Inter titles,
+   grouped by year. Sits inside <main class="prose …">, so the
+   wrapper uses `not-prose` to opt out of Tailwind typography.
+   --------------------------------------------------------------- */
+.archive {
+  margin: 0;
+}
+.archive section.year {
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  column-gap: 2rem;
+  align-items: baseline;
+  padding: 1.25rem 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+.archive section.year:first-of-type {
+  border-top: none;
+  padding-top: 0.25rem;
+}
+.archive section.year > h2 {
+  grid-column: 1;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  color: #a8a198;
+  margin: 0;
+  padding-top: 0.4rem;
+  line-height: 1.2;
+  position: sticky;
+  top: 1.25rem;
+  align-self: start;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.archive section.year > ol {
+  grid-column: 2;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.archive section.year > ol > li {
+  margin: 0;
+  list-style: none;
+}
+.archive section.year > ol > li + li {
+  margin-top: 0.35rem;
+}
+.archive section.year a {
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  column-gap: 1.5rem;
+  align-items: baseline;
+  text-decoration: none;
+  color: inherit;
+  padding: 0.15rem 0;
+}
+.archive section.year a time {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #a8a198;
+  font-variant-numeric: tabular-nums lining-nums;
+  white-space: nowrap;
+}
+.archive section.year a .t {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 600;
+  font-size: 1.05rem;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+  color: #1d1d1b;
+}
+.archive section.year a:hover .t {
+  color: #000;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  text-decoration-color: rgba(0, 0, 0, 0.35);
+}
+
+:is(:where(.dark) .archive) section.year {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+:is(:where(.dark) .archive) section.year > h2,
+:is(:where(.dark) .archive) section.year a time {
+  color: #6f685d;
+}
+:is(:where(.dark) .archive) section.year a .t {
+  color: #e6dfd0;
+}
+:is(:where(.dark) .archive) section.year a:hover .t {
+  color: #fff;
+  text-decoration-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Tag page heading: muted tracked label above the archive. */
+.archive-heading {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #7a736a;
+  margin: 0 0 2.5rem;
+}
+:is(:where(.dark) main) .archive-heading {
+  color: #a8a198;
 }

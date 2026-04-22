@@ -21,6 +21,14 @@ article {
     font-optical-sizing: auto;
 }
 
+/* Crossfade dark-mode toggle: header JS routes the flip through
+   document.startViewTransition(); this tunes the transition to ~220ms. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 220ms;
+  animation-timing-function: ease;
+}
+
 /* Book-quality line breaking (Chrome 117+, Safari 17.5+). Body paragraphs
    and list items ask the browser to avoid orphans/widows; headings get
    `balance` so multi-line titles wrap evenly. */

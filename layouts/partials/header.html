@@ -56,10 +56,16 @@
       setDark(event.matches);
     });
 
-    // manual switch
+    // manual switch — crossfade via View Transitions where supported,
+    // falls back to an instant flip in older browsers.
     const btnDark = document.querySelector('.btn-dark');
     btnDark.addEventListener('click', () => {
-      setDark(localStorage.getItem('dark') !== 'true');
+      const next = localStorage.getItem('dark') !== 'true';
+      if (document.startViewTransition) {
+        document.startViewTransition(() => setDark(next));
+      } else {
+        setDark(next);
+      }
     });
   </script>
 

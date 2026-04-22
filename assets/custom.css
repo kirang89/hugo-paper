@@ -21,6 +21,34 @@ article {
     font-optical-sizing: auto;
 }
 
+/* Figure/caption system: 1px hairline frame in light, inverted in dark.
+   Caption in sans at 0.85em, muted. Asymmetric margins — more air
+   above so the figure closes visually against the caption below. */
+article figure {
+  margin: 2.5em 0 1.5em;
+}
+article figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+}
+:is(:where(.dark) article) figure img {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+article figure figcaption {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.85em;
+  line-height: 1.4;
+  color: #5a544d;
+  margin-top: 0.5em;
+  text-align: left;
+}
+:is(:where(.dark) article) figure figcaption {
+  color: #9e978a;
+}
+
 /* Crossfade dark-mode toggle: header JS routes the flip through
    document.startViewTransition(); this tunes the transition to ~220ms. */
 ::view-transition-old(root),

@@ -248,6 +248,12 @@ article :not(pre) > code {
   display: inline;
   vertical-align: 0.02em;
 }
+/* Code blocks: use JetBrains Mono. Tailwind Prose's default monospace
+   stack otherwise wins and the code renders in Menlo/SFMono. */
+article pre,
+article pre code {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
 /* Strip the Tailwind typography `` markers around inline code. */
 .prose :where(code):not(:where([class~='not-prose'], [class~='not-prose'] *))::before,
 .prose :where(code):not(:where([class~='not-prose'], [class~='not-prose'] *))::after {

@@ -190,8 +190,10 @@ article ol > li::marker {
 article ul > li::marker {
   color: #bcb3a6;
 }
-article ol,
-article ul {
+/* Matches Tailwind Prose's selector specificity so `list-style: none`
+   actually defeats prose's default `list-style-type: decimal/disc`. */
+.prose :where(ol):not(:where([class~='not-prose'], [class~='not-prose'] *)),
+.prose :where(ul):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
   padding-left: 0;
   list-style: none;
   counter-reset: li;

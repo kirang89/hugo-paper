@@ -221,6 +221,19 @@ article > header.mb-16 {
 article > header h1 {
   padding-bottom: 0.5rem !important;
   letter-spacing: -0.015em;
+  color: #0d0d0d;
+}
+:is(:where(.dark) article) > header h1 {
+  color: #f3efe8;
+}
+/* Three-tier ink scale: display (h1) darker than body, subheads (h3)
+   a touch lighter than body. Reinforces hierarchy without relying on
+   size alone. */
+article h3 {
+  color: #3a352e;
+}
+:is(:where(.dark) article) h3 {
+  color: #c5beb0;
 }
 article > header > div.text-sm {
   opacity: 1 !important;

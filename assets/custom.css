@@ -21,6 +21,23 @@ article {
     font-optical-sizing: auto;
 }
 
+/* Drop cap on the first paragraph of a post. Floats the first letter
+   over ~3 lines, set in the serif at medium weight. Skipped if the
+   first paragraph starts with a tag or is nested — first-letter only
+   applies to the first inline box of the block. */
+article > section > p:first-of-type::first-letter {
+  font-family: 'Literata', Charter, Georgia, 'Times New Roman', Times, serif;
+  float: left;
+  font-size: 3.4em;
+  line-height: 0.85;
+  margin: 0.08em 0.08em 0 0;
+  font-weight: 500;
+  color: #0d0d0d;
+}
+:is(:where(.dark) article) > section > p:first-of-type::first-letter {
+  color: #f3efe8;
+}
+
 /* Figure/caption system: 1px hairline frame in light, inverted in dark.
    Caption in sans at 0.85em, muted. Asymmetric margins — more air
    above so the figure closes visually against the caption below. */

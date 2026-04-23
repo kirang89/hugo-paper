@@ -42,10 +42,10 @@ title = "Paper"
     url = "/about/"
     weight = 10
   [[menu.main]]
-    identifier = "contact"
-    name = "Contact"
-    url = "/contact/"
-    weight = 10
+    identifier = "photography"
+    name = "Photography"
+    url = "/photography/"
+    weight = 20
 
 [taxonomies]
 category = "categories"
